@@ -1,6 +1,7 @@
 {
   "title": "Fennec Copy Link Text",
-  "name": "Fennec Copy Link Text",
+  "name": "fennec_copy_link_text",
+	"id": "FennecCopyLinkText@shyangs",
   "version": "1.0",
   "description": "This addon adds a menu item to the context menu, and it lets you easily copy the visible text of the selected link.",
   "main": "index.js",
