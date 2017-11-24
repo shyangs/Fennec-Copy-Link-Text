@@ -12,26 +12,31 @@ let domMenuitem = document.createElement('menuitem');
 domMenu.setAttribute('type', 'context');
 domMenu.setAttribute('id', 'fcltHTML5Menu');
 domMenuitem.setAttribute('command', 'context');
-domMenuitem.setAttribute('label', 'This command has javascript');
+domMenuitem.setAttribute('label', 'Copy Link Text');
+
+let domTextarea = null;
 domMenuitem.addEventListener('click', function(){
-    let domTextarea = document.createElement('textarea');
-    domTextarea.textContent = '42';
     document.body.appendChild(domTextarea);
     domTextarea.select();
     document.execCommand('copy');
     domTextarea.remove();
-    domTextarea = null;
 });
+
 domMenu.appendChild(domMenuitem);
 document.body.appendChild(domMenu);
+
+domMenuitem = null;
+domMenu = null;
 
 document.addEventListener('contextmenu', function(event){
   let sLinkTag = 'A';
   let node = closest(event.target, sLinkTag);
   if(node){
     node.setAttribute("contextmenu", "fcltHTML5Menu");
+    domTextarea = document.createElement('textarea');
+    domTextarea.textContent = node.textContent;
   }
-});
 
-domMenuitem = null;
-domMenu = null;
+  sLinkTag = null;
+  node = null;
+});
