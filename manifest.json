@@ -1,0 +1,34 @@
+{
+  "name": "Fennec Copy Link Text",
+  "description": "This addon adds a menu item to the context menu, and it lets you easily copy the visible text of the selected link.",
+  "manifest_version": 2,
+  "version": "2.0.0",
+  "homepage_url": "https://github.com/shyangs/Fennec-Copy-Link-Text",
+  "default_locale": "en",
+
+  "applications": {
+    "gecko": {
+      "id": "FennecCopyLinkText@shyangs",
+      "strict_min_version": "57.0"
+    }
+  },
+
+  "developer": {
+    "name": "shyangs",
+    "url": "https://github.com/shyangs"
+  },
+
+  "permissions": [
+  ],
+
+  // "background": {
+  //   "scripts": ["background_scripts/background.js"]
+  // },
+
+  "content_scripts": [{
+    "matches": ["<all_urls>", "file:///*"],
+    "js": ["content_scripts/content.js"],
+    "run_at": "document_end",
+    "all_frames": true
+  }]
+}
