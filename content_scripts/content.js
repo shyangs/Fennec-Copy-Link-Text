@@ -18,8 +18,32 @@ let domTextarea = null;
 domMenuitem.addEventListener('click', function(){
     document.body.appendChild(domTextarea);
     domTextarea.select();
-    document.execCommand('copy');
-    domTextarea.remove();
+    let bln = document.execCommand('copy');
+    if(bln){
+      domTextarea.remove();
+    }else{
+      let scrollX = window.screenX;
+      let scrollY = window.scrollY;
+
+      // https://bugzilla.mozilla.org/show_bug.cgi?id=1420466
+      let newtext = document.createTextNode('Copying text command was successful. Click to continue.');
+      let domDiv = document.createElement('div');
+      domDiv.style.backgroundColor = 'white';
+      domDiv.style.width = '80%';
+      domDiv.style.margin = '0 auto';
+      domDiv.style.padding = 10;
+      domDiv.appendChild(newtext);
+      let myLightbox = lightbox({
+        contentNode: domDiv
+      });
+      myLightbox.addEventListener('click', function(){
+        domTextarea.select();
+        document.execCommand('copy');
+        domTextarea.remove();
+        myLightbox.remove();
+        window.scroll(scrollX, scrollY);
+      });
+    }
 });
 
 domMenu.appendChild(domMenuitem);
